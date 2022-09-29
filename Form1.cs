@@ -32,7 +32,6 @@ namespace FringillaFunctionality1
                 Samples = GetSamples(fileNames);
                 dataGridView.DataSource = Samples;
                 dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                checkedListBox.Enabled = true;
             }      
         }
         private List<Sample> GetSamples(string[] fileNames)
@@ -48,12 +47,12 @@ namespace FringillaFunctionality1
                 {
                     SampleNo = index,
                     FileName = data[0],
-                    AvgDistBckg = float.Parse(data[1]),
-                    AvgDistFilm = float.Parse(data[2]),
-                    ZeroShift = float.Parse(data[3]),
+                    AvgDistBckg = (float)Math.Round(double.Parse(data[1]),1),
+                    AvgDistFilm = (float)Math.Round(double.Parse(data[2]), 1),
+                    ZeroShift = (float)Math.Round(double.Parse(data[3]), 1),
                     NNumber = int.Parse(data[4]),
                     Lambda = int.Parse(data[5]),
-                    Thickness = float.Parse(data[6])
+                    Thickness = (float)Math.Round(double.Parse(data[6]), 1),
                 });
                 index++;
             }
@@ -94,62 +93,28 @@ namespace FringillaFunctionality1
 
             return ans;
         }
-        //private void checkedListBox_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    foreach(object itemChecked in checkedListBox.CheckedItems)
-        //    {
-        //        for(int i = 0; i < dataGridView.RowCount; i++)
-        //        {
-        //            string fileName = FringillaFunctionality1.Properties.Settings.Default.workDirectory + @"\" +
-        //                dataGridView.Rows[i].Cells[0].Value.ToString();
-        //            string[] items = Program.ExtractUsefullData(fileName);
+        private void btnExportExcel_Click(object sender, EventArgs e)
+        {
+            if(dataGridView.Rows.Count >0)
+            {
+                Microsoft.Office.Interop.Excel.Application xcelApp = new Microsoft.Office.Interop.Excel.Application();
+                xcelApp.Application.Workbooks.Add(Type.Missing);
+                for(int i = 1; i < dataGridView.Columns.Count + 1; i++)
+                {
+                    xcelApp.Cells[1, i] = dataGridView.Columns[i - 1].HeaderText;
+                }
 
-        //            // delete all collums from 1 to the end
-        //            for(int j = 1; j < dataGridView.ColumnCount;j++)
-        //            {
-        //                dataGridView.Columns.RemoveAt(j);
-        //            }
-        //            ///
+                for(int i = 0; i < dataGridView.Rows.Count; i++)
+                {
 
-        //            if(checkedListBox.Items.IndexOf(itemChecked) == 0)      // avgDistBckg
-        //            {
-        //                dataGridView.Columns.Add("avgDistBckg", "avg. dist. Backgd");
-        //            }
-
-        //            if (checkedListBox.Items.IndexOf(itemChecked) == 1)     // avgDistFilm
-        //            {
-        //                dataGridView.Columns.Add("avgDistFilm", "avg. dist. Film");
-        //            }
-
-        //            if (checkedListBox.Items.IndexOf(itemChecked) == 2)     // 0shift
-        //            {
-        //                dataGridView.Columns.Add("0shift", "0-order shift");
-        //            }
-
-        //            if (checkedListBox.Items.IndexOf(itemChecked) == 3)     // n
-        //            {
-        //                dataGridView.Columns.Add("n", "n");
-        //            }
-
-        //            if (checkedListBox.Items.IndexOf(itemChecked) == 4)     // lambda
-        //            {
-        //                dataGridView.Columns.Add("lambda", "lambda");
-        //            }
-
-        //            if (checkedListBox.Items.IndexOf(itemChecked) == 5)     // thickness
-        //            {
-        //                dataGridView.Columns.Add("thickness", "thickness");
-        //            }
-
-
-
-        //        }
-
-                //Use the IndexOf method to get the index of an item
-                //MessageBox.Show("Item with title: \"" + itemChecked.ToString() +
-                //    "\", is checked. Checked state is: " +
-                //    checkedListBox.GetItemCheckState(checkedListBox.Items.IndexOf(itemChecked)).ToString() + ".");
-        //    }
-        //}
+                    for(int j = 0; j < dataGridView.Columns.Count; j++)
+                    {
+                        xcelApp.Cells[i + 2, j + 1] = dataGridView.Rows[i].Cells[j].Value;            //.ToString();
+                    }
+                    xcelApp.Columns.AutoFit();
+                    xcelApp.Visible = true;
+                }
+            }
+        }
     }
 }

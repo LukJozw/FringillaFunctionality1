@@ -30,11 +30,11 @@ namespace FringillaFunctionality1
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnOpen = new System.Windows.Forms.Button();
-            this.checkedListBox = new System.Windows.Forms.CheckedListBox();
-            this.sampleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.btnExportExcel = new System.Windows.Forms.Button();
             this.sampleNoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fileNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.avgDistBckgDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,9 +44,10 @@ namespace FringillaFunctionality1
             this.lambdaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.thicknessDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sampleBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.sampleBindingSource)).BeginInit();
+            this.sampleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sampleBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -62,26 +63,6 @@ namespace FringillaFunctionality1
             this.btnOpen.Text = "Open";
             this.btnOpen.UseVisualStyleBackColor = true;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
-            // 
-            // checkedListBox
-            // 
-            this.checkedListBox.Enabled = false;
-            this.checkedListBox.FormattingEnabled = true;
-            this.checkedListBox.Items.AddRange(new object[] {
-            "Average Distance Bcg",
-            "Average Distance Film",
-            "0 order shift",
-            "n",
-            "Lambda [nm]",
-            "Thickness [nm]"});
-            this.checkedListBox.Location = new System.Drawing.Point(796, 40);
-            this.checkedListBox.Name = "checkedListBox";
-            this.checkedListBox.Size = new System.Drawing.Size(179, 94);
-            this.checkedListBox.TabIndex = 3;
-            // 
-            // sampleBindingSource
-            // 
-            this.sampleBindingSource.DataSource = typeof(FringillaFunctionality1.Sample);
             // 
             // dataGridView
             // 
@@ -101,6 +82,18 @@ namespace FringillaFunctionality1
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(778, 507);
             this.dataGridView.TabIndex = 4;
+            // 
+            // btnExportExcel
+            // 
+            this.btnExportExcel.FlatAppearance.BorderSize = 3;
+            this.btnExportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportExcel.Image")));
+            this.btnExportExcel.Location = new System.Drawing.Point(796, 358);
+            this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.Size = new System.Drawing.Size(179, 161);
+            this.btnExportExcel.TabIndex = 5;
+            this.btnExportExcel.UseVisualStyleBackColor = true;
+            this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
             // 
             // sampleNoDataGridViewTextBoxColumn
             // 
@@ -154,19 +147,23 @@ namespace FringillaFunctionality1
             // 
             this.sampleBindingSource1.DataSource = typeof(FringillaFunctionality1.Sample);
             // 
+            // sampleBindingSource
+            // 
+            this.sampleBindingSource.DataSource = typeof(FringillaFunctionality1.Sample);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 531);
+            this.Controls.Add(this.btnExportExcel);
             this.Controls.Add(this.dataGridView);
-            this.Controls.Add(this.checkedListBox);
             this.Controls.Add(this.btnOpen);
             this.Name = "Form1";
             this.Text = "FringillaCollector";
-            ((System.ComponentModel.ISupportInitialize)(this.sampleBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sampleBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -174,7 +171,6 @@ namespace FringillaFunctionality1
         #endregion
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button btnOpen;
-        private System.Windows.Forms.CheckedListBox checkedListBox;
         private System.Windows.Forms.BindingSource sampleBindingSource;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn sampleNoDataGridViewTextBoxColumn;
@@ -186,6 +182,7 @@ namespace FringillaFunctionality1
         private System.Windows.Forms.DataGridViewTextBoxColumn lambdaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn thicknessDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource sampleBindingSource1;
+        private System.Windows.Forms.Button btnExportExcel;
     }
 }
 
